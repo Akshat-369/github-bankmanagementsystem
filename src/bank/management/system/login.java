@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class login extends JFrame implements ActionListener {
 
-    JLabel label1,label2,label3;
+    JLabel label1,label2,label3 ;
     JButton button1, button2, button3;
 
     JTextField textField2;
