@@ -16,7 +16,7 @@ public class signup2 extends JFrame implements ActionListener {
     signup2(String first){
         super("Application Form");
 
-
+        this.formno = first;
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/bank.png"));
         Image i2 = i1.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT);
@@ -24,9 +24,6 @@ public class signup2 extends JFrame implements ActionListener {
         JLabel image = new JLabel(i3);
         image.setBounds(150,5,100,100);
         add(image);
-
-        this.formno = first;
-
 
         JLabel l1 = new JLabel("PAGE 2");
         l1.setFont(new Font("Ralway",Font.ROMAN_BASELINE,22));
@@ -182,8 +179,10 @@ public class signup2 extends JFrame implements ActionListener {
         ButtonGroup buttonGroup2 = new ButtonGroup();
         buttonGroup2.add(r1);
         buttonGroup2.add(r2);
-        buttonGroup2.add(e1);
-        buttonGroup2.add(e2);
+        //grouping the radio button
+        ButtonGroup buttonGroup3 = new ButtonGroup();
+        buttonGroup3.add(e1);
+        buttonGroup3.add(e2);
 
         //label for Form no
         JLabel form = new JLabel("Form No :");
@@ -214,6 +213,43 @@ public class signup2 extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String rel = (String) comboBox.getSelectedItem();
+        String cate = (String) comboBox2.getSelectedItem();
+        String inc = (String) comboBox3.getSelectedItem();
+        String edu = (String) comboBox4.getSelectedItem();
+        String occ = (String) comboBox5.getSelectedItem();
+
+        String pan = textFieldpan.getText();
+        String adhar = textFieldadhar.getText();
+
+        String senior = null;
+        if (r1.isSelected()){
+            senior = "Yes";
+        } else if (r2.isSelected()) {
+            senior = "No";
+        }
+
+        String existacc = null;
+        if (e1.isSelected()){
+            existacc = "Yes";
+        } else if (e2.isSelected()) {
+            existacc = "No";
+        }
+
+        try {
+            if (textFieldadhar.getText().isEmpty() || textFieldpan.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null,"Fill all the details");
+            }else {
+                con c1 = new con();
+                String q = "insert into signuptwo values('"+formno+"','"+rel+"','"+cate+"','"+inc+"','"+edu+"','"+occ+"','"+pan+"','"+adhar+"','"+senior+"','"+existacc+"')";
+                c1.statement.executeUpdate(q);
+                new signup3(formno);
+                setVisible(false);
+            }
+
+        }catch (Exception E){
+            E.printStackTrace();
+        }
 
     }
 
