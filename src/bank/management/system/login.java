@@ -15,6 +15,7 @@ public class login extends JFrame implements ActionListener {
 
     login(){
         super("Banks Management System");
+
         //importing images to the screen
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/bank.png"));//loading from memory to variable i1
         Image i2 = i1.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT);//accessing image and making changes
@@ -115,8 +116,8 @@ public class login extends JFrame implements ActionListener {
                 textField2.setText("");
                 passwordField2.setText("");
             }else if (e.getSource() == button3){
-                System.out.println("hello");
-
+             new signup();
+             setVisible(false);
             }
 
         }catch (Exception E){

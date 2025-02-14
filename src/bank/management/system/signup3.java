@@ -25,6 +25,7 @@ public class signup3 extends JFrame implements ActionListener {
         JLabel image = new JLabel(i3);
         image.setBounds(150,5,100,100);
         add(image);
+
         //label for page 3
         JLabel l1 = new JLabel("PAGE 3");
         l1.setFont(new Font("Ralway",Font.ROMAN_BASELINE,22));
@@ -261,6 +262,7 @@ public class signup3 extends JFrame implements ActionListener {
                         c1.statement.executeUpdate(q2);
 
                         JOptionPane.showMessageDialog(null, "Card number : "+cardno+"\n PIN : "+pin);
+                        new Deposit(pin);
                         setVisible(false);
                     }
             }else if (e.getSource()==cancel){
