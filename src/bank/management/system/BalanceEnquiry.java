@@ -12,7 +12,8 @@ public class BalanceEnquiry extends JFrame implements ActionListener {
     JButton b1;
     String pin;
 
-    BalanceEnquiry(){
+    BalanceEnquiry(String pin){
+        this.pin = pin;
 
         //added the ATM image to the Frame
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/atm2.png"));
@@ -71,7 +72,6 @@ public class BalanceEnquiry extends JFrame implements ActionListener {
 
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         setVisible(false);
@@ -79,6 +79,6 @@ public class BalanceEnquiry extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new BalanceEnquiry();
+        new BalanceEnquiry("");
     }
 }
