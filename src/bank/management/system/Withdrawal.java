@@ -30,7 +30,7 @@ public class Withdrawal extends JFrame implements ActionListener {
         JLabel label =  new JLabel("MAXIMUM WITHDRAWAL IS RS.10,000");
         label.setForeground(Color.WHITE);
         label.setFont(new Font("System",Font.BOLD,20));
-        label.setBounds(450,150,700,35);
+        label.setBounds(430,130,700,35);
         image.add(label);
 
         //label for withdrawal money
@@ -76,41 +76,46 @@ public class Withdrawal extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        try{
+        if (e.getSource() == b1){
+        try {
             String amount = textField.getText();
             Date date = new Date();
 
-            if (textField.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null,"PLEASE ENTER THE AMOUNT YOU WANT TO WITHDRAW");
+            if (textField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "PLEASE ENTER THE AMOUNT YOU WANT TO WITHDRAW");
             } else {
                 con c = new con();
-                ResultSet resultSet = c.statement.executeQuery("select * from bank where pin = '"+pin+"'");
-                int balance = 0 ;
+                ResultSet resultSet = c.statement.executeQuery("select * from bank where pin = '" + pin + "'");
+                int balance = 0;
 
-                while (resultSet.next()){
-                    if (resultSet.getString("type").equals("Deposit")){
+                while (resultSet.next()) {
+                    if (resultSet.getString("type").equals("Deposit")) {
                         balance += Integer.parseInt(resultSet.getString("amount"));
                     } else {
                         balance -= Integer.parseInt(resultSet.getString("amount"));
                     }
+
                     //checking if the balance in ACCOUNT is sufficient or insufficient
-                    if (balance < Integer.parseInt(amount)){
-                        JOptionPane.showMessageDialog(null,"Insufficient Balance");
+                    if (balance < Integer.parseInt(amount)) {
+                        JOptionPane.showMessageDialog(null, "Insufficient Balance");
                         return;
                     }
 
-                    c.statement.executeUpdate("insert into bank values('"+pin+"','"+date+"', 'Withdrawal','"+amount+"')");
-                    JOptionPane.showMessageDialog(null,"Rs. " + amount +" debited successfully");
+                    c.statement.executeUpdate("insert into bank values('" + pin + "','" + date + "', 'Withdrawal','" + amount + "')");
+                    JOptionPane.showMessageDialog(null, "Rs. " + amount + " debited successfully");
                     setVisible(false);
                     new Main(pin);
-
                 }
             }
-
-
         } catch (Exception E) {
 
         }
+
+    } else if (e.getSource() == b2) {
+            setVisible(false);
+            new Main(pin);
+        }
+
     }
 
     public static void main(String[] args) {
