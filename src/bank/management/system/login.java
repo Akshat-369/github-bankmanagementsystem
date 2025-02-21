@@ -132,9 +132,8 @@ public class login extends JFrame implements ActionListener {
                 ResultSet resultSet = c.statement.executeQuery(Q);
 
                 if (resultSet.next()) {
-                    System.out.println("Login successful! Redirecting to Main...");
-                    JOptionPane.showMessageDialog(null, "Login Successful!");
-
+//                    System.out.println("Login successful! Redirecting to Main...");
+//                    JOptionPane.showMessageDialog(null, "Login Successful!");
                     new Main(pin); // Check if Main class exists
                     setVisible(false);
                 } else {
@@ -165,6 +164,10 @@ public class login extends JFrame implements ActionListener {
     public static void main(String[] args) {
         new login();
     }
+
+
+
+
    /* @Override
     public void actionPerformed(ActionEvent e) {
         try {
