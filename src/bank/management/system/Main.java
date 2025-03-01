@@ -87,14 +87,10 @@ public class Main extends JFrame implements ActionListener {
         b7.addActionListener(this);
         image.add(b7);
 
-
-
         setLayout(null);
         setSize(1550,1080);
         setLocation(0,0);
         setVisible(true);
-
-
     }
 
     @Override
