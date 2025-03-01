@@ -59,11 +59,7 @@ public class pin extends JFrame implements ActionListener {
         p2.setBounds(590,215,180,25);
         image.add(p2);
 
-
-
-
-
-        //BUTTON for deposit
+        //BUTTON for Change
         b1 = new JButton("CHANGE");
         b1.setBounds(680,285,140,30);
         b1.setBackground(new Color(65,125,128));
@@ -127,10 +123,6 @@ public class pin extends JFrame implements ActionListener {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
-
-
-
     }
 
     public static void main(String[] args) {
