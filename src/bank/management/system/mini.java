@@ -13,17 +13,17 @@ public class mini extends JFrame implements ActionListener {
         this.pin = pin;
 
         getContentPane().setBackground(new Color(255,204,204));
-        setSize(400,600);
+        setSize(500,700);
         setLocation(20,20);
         setLayout(null);
 
         JLabel label = new JLabel();
-        label.setBounds(20,140,400,200);
+        label.setBounds(20,100,400,200);
         add(label);
 
-        JLabel label2 = new JLabel();
-        label.setFont(new Font("System",Font.BOLD,15));
-        label2.setBounds(20,140,400,20);
+        JLabel label2 = new JLabel("Mini Statement");
+        label2.setFont(new Font("System",Font.BOLD,20));
+        label2.setBounds(180,20,200,20);
         add(label2);
 
         JLabel label3 = new JLabel();
@@ -33,8 +33,6 @@ public class mini extends JFrame implements ActionListener {
         JLabel label4 = new JLabel();
         label4.setBounds(20,400,300,20);
         add(label4);
-
-
 
         try{
             con c = new con();
@@ -55,7 +53,7 @@ public class mini extends JFrame implements ActionListener {
             while (resultSet.next()){
 
 
-                label.setText(label.getText()+"<html>"+resultSet.getString("date")+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+resultSet.getString("type")+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + resultSet.getString("amount")+"<br><br><html>");
+                label.setText(label.getText()+"<html>"+resultSet.getString("date")+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+resultSet.getString("type")+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  "+ resultSet.getString("amount")+"<br><html>");
 
 
                 if (resultSet.getString("type").equals("Deposit")){
