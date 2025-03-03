@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 public class login extends JFrame implements ActionListener {
 
@@ -15,6 +16,7 @@ public class login extends JFrame implements ActionListener {
 
     login(){
         super("Banks Management System");
+
         //importing images to the screen
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/bank.png"));//loading from memory to variable i1
         Image i2 = i1.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT);//accessing image and making changes
@@ -104,28 +106,100 @@ public class login extends JFrame implements ActionListener {
         setLayout(null);
         setSize(850,480);
         setLocation(300,100);
+        setUndecorated(true);
         setVisible(true);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            if (e.getSource() == button1){
+            if (e.getSource() == button1) {
+                System.out.println("Sign In button clicked."); // Debugging line
+
+                con c = new con();
+                String card_no = textField2.getText();
+                String pin = passwordField2.getText();
+
+                // Check if fields are empty
+                if (card_no.isEmpty() || pin.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Card number and PIN must not be empty!");
+                    System.out.println("Empty fields detected. Login aborted.");
+                    return;
+                }
+
+                String Q = "SELECT * FROM login WHERE card_number = '" + card_no + "' AND pin = '" + pin + "'";
+                System.out.println("Executing query: " + Q); // Debugging line
+
+                ResultSet resultSet = c.statement.executeQuery(Q);
+
+                if (resultSet.next()) {
+//                    System.out.println("Login successful! Redirecting to Main...");
+//                    JOptionPane.showMessageDialog(null, "Login Successful!");
+                    new Main(pin); // Check if Main class exists
+                    setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Incorrect Card Number or PIN. Please try again.");
+                    System.out.println("Login failed. Invalid credentials.");
+                }
 
             } else if (e.getSource() == button2) {
                 textField2.setText("");
                 passwordField2.setText("");
-            }else if (e.getSource() == button3){
-                System.out.println("hello");
+                System.out.println("Clear button clicked. Fields reset.");
+            } else if (e.getSource() == button3) {
+                System.out.println("Sign Up button clicked.");
+                new signup(); // Ensure signup class exists
+                setVisible(false);
+            }
 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Error in actionPerformed: " + ex.getMessage());
+        }
+    }
+
+
+
+
+
+    public static void main(String[] args) {
+        new login();
+    }
+
+
+
+
+   /* @Override
+    public void actionPerformed(ActionEvent e) {
+        try {
+            if (e.getSource() == button1){
+                con c1 = new con();
+                String cardno = textField2.getText();
+                String pin;
+                pin = passwordField2.getText();
+                String q = "select * from login where card_number = '"+cardno+"' and pin = '"+pin+"'";
+                ResultSet resultSet = c1.statement.executeQuery(q);
+
+                if (resultSet.next()){
+                    setVisible(false);
+                    new Main(pin);
+                    }else {
+                    JOptionPane.showMessageDialog(null, "Incorrect Card Number or PIN. Please try again.");
+                }
+
+            } else if (e.getSource() == button2) {
+                textField2.setText("");
+                passwordField2.setText("");
+
+            }else if (e.getSource() == button3){
+             new signup();
+             setVisible(false);
             }
 
         }catch (Exception E){
             E.printStackTrace();
         }
-    }
+    }*/
 
-    public static void main(String[] args) {
-        new login();
-    }
 
 }

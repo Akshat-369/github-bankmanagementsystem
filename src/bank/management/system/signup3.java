@@ -25,6 +25,7 @@ public class signup3 extends JFrame implements ActionListener {
         JLabel image = new JLabel(i3);
         image.setBounds(150,5,100,100);
         add(image);
+
         //label for page 3
         JLabel l1 = new JLabel("PAGE 3");
         l1.setFont(new Font("Ralway",Font.ROMAN_BASELINE,22));
@@ -229,10 +230,10 @@ public class signup3 extends JFrame implements ActionListener {
 
         Random ran = new Random();
         long first7 =  (ran.nextLong() % 90000000L) + 1409963000000000L;
-        String cardno = " " +Math.abs(first7);
+        String cardno = String.valueOf(Math.abs(first7)).trim();
 
         long first3 = (ran.nextLong() % 9000L)+1000L;
-        String pin = " " + Math.abs(first3);
+        String pin = String.valueOf(Math.abs(first3)).trim();
 
         String fac = "";
         if (c1.isSelected()){
@@ -261,6 +262,7 @@ public class signup3 extends JFrame implements ActionListener {
                         c1.statement.executeUpdate(q2);
 
                         JOptionPane.showMessageDialog(null, "Card number : "+cardno+"\n PIN : "+pin);
+                        new Deposit(pin);
                         setVisible(false);
                     }
             }else if (e.getSource()==cancel){
