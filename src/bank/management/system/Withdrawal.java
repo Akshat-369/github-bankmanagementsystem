@@ -80,16 +80,14 @@ public class Withdrawal extends JFrame implements ActionListener {
         try {
             String amount = textField.getText();
             Date date = new Date();
+            int withdrawAmount = Integer.parseInt(amount);
 
             if (textField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "PLEASE ENTER THE AMOUNT YOU WANT TO WITHDRAW");
-                return;
-            }
-            int withdrawAmount = Integer.parseInt(amount);
-            if (withdrawAmount > 10000) {
+            } else if (withdrawAmount > 10000){
                 JOptionPane.showMessageDialog(null, "Withdrawal limit exceeded! Maximum withdrawal is Rs.10,000");
                 return;
-            }
+            } else {
                 con c = new con();
                 ResultSet resultSet = c.statement.executeQuery("select * from bank where pin = '" + pin + "'");
                 int balance = 0;
@@ -102,7 +100,7 @@ public class Withdrawal extends JFrame implements ActionListener {
                     }
 
                     //checking if the balance in ACCOUNT is sufficient or insufficient
-                    if (balance < withdrawAmount) {
+                    if (balance < Integer.parseInt(amount)) {
                         JOptionPane.showMessageDialog(null, "Insufficient Balance");
                         return;
                     }
@@ -112,16 +110,18 @@ public class Withdrawal extends JFrame implements ActionListener {
                     setVisible(false);
                     new Main(pin);
                 }
+            }
         } catch (Exception E) {
             E.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error processing the withdrawal");
         }
 
     } else if (e.getSource() == b2) {
             setVisible(false);
             new Main(pin);
         }
+
     }
+
     public static void main(String[] args) {
         new Withdrawal("");
     }
