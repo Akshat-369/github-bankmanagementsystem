@@ -38,7 +38,7 @@ public class Main extends JFrame implements ActionListener {
         image.add(b1);
 
         //Button for cash deposit
-        b2 = new JButton("CASH DEPOSIT");
+        b2 = new JButton("WITHDRAWAL");
         b2.setBounds(660,210,160,30);
         b2.setBackground(new Color(65,125,128));
         b2.setForeground(Color.WHITE);

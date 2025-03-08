@@ -106,7 +106,7 @@ public class login extends JFrame implements ActionListener {
         setLayout(null);
         setSize(850,480);
         setLocation(300,100);
-        setUndecorated(true);
+        //setUndecorated(true);
         setVisible(true);
     }
 
