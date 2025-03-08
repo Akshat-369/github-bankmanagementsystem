@@ -8,6 +8,8 @@
     import java.awt.event.ActionListener;
     import java.sql.Statement;
     import java.util.Random;
+    import java.util.regex.Pattern;
+
 
     public class signup extends JFrame implements ActionListener {
 
@@ -260,15 +262,21 @@
             String state = textFieldstate.getText();
 
             try {
-                if (textFieldName.getText().isEmpty()){
+                String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+
+                if (name.isEmpty() || fname.isEmpty() || dob.isEmpty() || email.isEmpty() || address.isEmpty() || city.isEmpty() || pin.isEmpty() || state.isEmpty()){
                     JOptionPane.showMessageDialog(null,"Fill all the details");
-                }else {
+                }else if (!Pattern.matches(emailRegex, email)) {
+                    JOptionPane.showMessageDialog(null, "Incorrect Email ID! Please enter a valid email.", "Invalid Email", JOptionPane.ERROR_MESSAGE);
+                    return;
+                } else {
                     con con1 = new con();
                     String q = "insert into signup values('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+marital+"','"+address+"','"+city+"','"+pin+"','"+state+"')";
                     con1.statement.executeUpdate(q);
                     new signup2(first);
                     setVisible(false);
                 }
+
 
             }catch (Exception E){
                 E.printStackTrace();
